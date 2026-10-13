@@ -1,0 +1,38 @@
+import React, {useState} from "react";
+import Input from "./Input";
+import PostDisplay from "./PostDisplay";
+
+function Home() {
+  const [count, setCount] = useState(0);
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [posts, setPosts] = useState([])
+
+  const createPost = () => {
+    if(title != "" && desc != ""){
+      setCount((prev) => prev+1);
+      setPosts(prevPosts => [...prevPosts, {id: count, title:title,desc:desc}])
+      setTitle("");
+      setDesc('');
+    }
+  }
+  const handleDeletePost = (id) => {
+      setPosts(prevPosts => prevPosts.filter(p => p.id !== id));
+  }
+  return (
+    <div className="text-center ma-20">
+      <div className="mb-20">
+        <Input title={title} setTitle={setTitle} desc={desc} setDesc={setDesc}  />
+        <button data-testid="create-button" className="mt-10" onClick={createPost}>
+          Create Post
+        </button>
+      </div>
+      <div className="posts-section">
+        
+        <PostDisplay posts={posts} onDeletePost={handleDeletePost} />
+      </div>
+    </div>
+  );
+}
+
+export default Home;
