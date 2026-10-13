@@ -1,0 +1,19 @@
+
+
+function Input({title, setTitle, desc, setDesc}) {
+  const updateTitle = (e) => {
+    setTitle(e.target.value);
+  }
+
+  const updateDesc = (e) => {
+    setDesc(e.target.value);
+  }
+  return (
+    <div className="layout-column justify-content-center align-items-center">
+      <input className="w-100" type="text" placeholder="Enter Title" value={title} data-testid="title-input" onChange={updateTitle} />
+      <textarea className="mt-10 w-100" placeholder="Enter Description" value={desc} data-testid="description-input" onChange={updateDesc} />
+    </div>
+  );
+}
+
+export default Input;
